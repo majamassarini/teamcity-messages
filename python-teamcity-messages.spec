@@ -1,7 +1,7 @@
 %global pypi_name         teamcity-messages
 
 Name:           python-%{pypi_name}
-Version:        1.30
+Version:        1.31
 Release:        1%{?dist}
 Summary:        Send test results to TeamCity continuous integration servers
 
