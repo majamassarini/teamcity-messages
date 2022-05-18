@@ -33,11 +33,14 @@ project {
 
     buildType(Build)
     buildType(Python39windows)
+    buildType(Python310windows)
     buildType(Python27linux)
     buildType(Python37linux)
     buildType(Python38linux)
     buildType(Python39linux)
+    buildType(Python310linux)
     buildType(Pypy2linux)
+    buildType(Pypy37linux)
     buildType(Pypy3linux)
 
     template(LinuxTeamcityMessagesTemplate)
@@ -162,11 +165,14 @@ object Build : BuildType({
 
     dependencies {
         snapshot(Python39windows) {}
+        snapshot(Python310windows) {}
         snapshot(Python27linux) {}
         snapshot(Python37linux) {}
         snapshot(Python38linux) {}
         snapshot(Python39linux) {}
+        snapshot(Python310linux) {}
         snapshot(Pypy2linux) {}
+        snapshot(Pypy37linux) {}
         snapshot(Pypy3linux) {}
     }
 
@@ -179,6 +185,15 @@ object Python39windows : BuildType({
 
     params {
         param("PYTHON_DOCKER_IMAGE", "python:3.9")
+    }
+})
+
+object Python310windows : BuildType({
+    templates(WindowsTeamcityMessagesTemplate)
+    name = "Python 3.10 (Windows)"
+
+    params {
+        param("PYTHON_DOCKER_IMAGE", "python:3.10")
     }
 })
 
@@ -225,6 +240,16 @@ object Python39linux : BuildType({
     }
 })
 
+object Python310linux : BuildType({
+    templates(LinuxTeamcityMessagesTemplate)
+    name = "Python 3.10 (Linux)"
+
+    params {
+        param("PYTHON_EXECUTABLE", "python")
+        param("PYTHON_DOCKER_IMAGE", "python:3.10")
+    }
+})
+
 object Pypy2linux : BuildType({
     templates(LinuxTeamcityMessagesTemplate)
     name = "Pypy 2 (Linux)"
@@ -243,6 +268,17 @@ object Pypy3linux : BuildType({
     params {
         param("PYTHON_EXECUTABLE", "pypy")
         param("PYTHON_DOCKER_IMAGE", "pypy:3")
+    }
+
+})
+
+object Pypy37linux : BuildType({
+    templates(LinuxTeamcityMessagesTemplate)
+    name = "Pypy 3.7 (Linux)"
+
+    params {
+        param("PYTHON_EXECUTABLE", "pypy")
+        param("PYTHON_DOCKER_IMAGE", "pypy:3.7")
     }
 
 })
