@@ -4,9 +4,9 @@
 specfile_path: python-teamcity-messages.spec
 
 # add or remove files that should be synced
-synced_files:
-    - python-teamcity-messages.spec
-    - .packit.yaml
+files_to_sync:
+  - python-teamcity-messages.spec
+  - .packit.yaml
 
 # name in upstream package repository or registry (e.g. in PyPI)
 upstream_package_name: teamcity-messages
@@ -20,5 +20,22 @@ upstream_tag_template: v{version}
 jobs:
 - job: copr_build
   trigger: commit
-  metadata:
-    targets: fedora-stable
+  targets: 
+  - fedora-stable
+  - fedora-development
+- job: propose_downstream
+  trigger: release
+  dist_git_branches:
+  - fedora-stable
+  - fedora-development
+# downstream automation:
+- job: koji_build
+  trigger: commit
+  allowed_pr_authors: ["packit"]
+  dist_git_branches:
+  - fedora-stable
+  - fedora-development
+- job: bodhi_update
+  trigger: commit
+  dist_git_branches:
+    - fedora-stable # branched version, rawhide updates are created automatically
