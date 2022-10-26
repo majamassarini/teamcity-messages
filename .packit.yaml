@@ -20,18 +20,23 @@ upstream_tag_template: v{version}
 jobs:
   - job: copr_build
     trigger: commit
-    targets: fedora-stable
+    targets: 
+      - fedora-rawhide
+      - fedora-stable
   - job: propose_downstream
     trigger: release
     dist_git_branches:
-    - fedora-rawhide
+      - fedora-rawhide
+      - fedora-stable
   # downstream automation:
   - job: koji_build
     trigger: commit
     allowed_pr_authors: ["packit"]
     dist_git_branches:
-    - fedora-rawhide
+      - fedora-rawhide
+      - fedora-stable
   - job: bodhi_update
     trigger: commit
     dist_git_branches:
       - fedora-rawhide # not really usefull, rawhide updates are created automatically      
+      - fedora-stable
