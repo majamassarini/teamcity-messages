@@ -17,6 +17,8 @@ upstream_project_url: https://github.com/majamassarini/teamcity-messages
 
 upstream_tag_template: v{version}
 
+issue_repository: https://github.com/majamassarini/teamcity-messages-issues
+
 jobs:
   - job: copr_build
     trigger: commit
