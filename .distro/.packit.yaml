@@ -1,0 +1,46 @@
+# See the documentation for more information:
+# https://packit.dev/docs/configuration/
+
+specfile_path: python-teamcity-messages.spec
+
+# add or remove files that should be synced
+files_to_sync:
+    - python-teamcity-messages.spec
+    - .packit.yaml
+
+# name in upstream package repository or registry (e.g. in PyPI)
+upstream_package_name: teamcity-messages
+# downstream (Fedora) RPM package name
+downstream_package_name: python-teamcity-messages
+
+upstream_project_url: https://github.com/JetBrains/teamcity-messages
+
+upstream_tag_template: v{version}
+
+jobs:
+  - job: copr_build
+    trigger: commit
+    targets: 
+      - fedora-rawhide
+      - fedora-stable
+  - job: propose_downstream
+    trigger: release
+    dist_git_branches:
+      - fedora-rawhide
+      - fedora-stable
+  # downstream automation:
+  - job: koji_build
+    trigger: commit
+    allowed_pr_authors: ["packit"]
+    dist_git_branches:
+      - fedora-rawhide
+      - fedora-stable
+  - job: bodhi_update
+    trigger: commit
+    dist_git_branches:
+      - fedora-rawhide # not really usefull, rawhide updates are created automatically      
+      - fedora-stable
+  - job: pull_from_upstream
+    trigger: release
+    dist_git_branches:
+      - fedora-rawhide     

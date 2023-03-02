@@ -1,0 +1,20 @@
+upstream_project_url: https://github.com/majamassarini/teamcity-messages.git
+upstream_ref: source-git
+downstream_package_name: python-teamcity-messages
+specfile_path: .distro/python-teamcity-messages.spec
+patch_generation_ignore_paths:
+- .distro
+patch_generation_patch_id_digits: 1
+sync_changelog: true
+files_to_sync:
+- src: .distro/
+  dest: .
+  delete: true
+  filters:
+  - protect .git*
+  - protect sources
+  - exclude source-git.yaml
+  - exclude .gitignore
+sources:
+- path: teamcity-messages-1.32.tar.gz
+  url: https://src.fedoraproject.org/repo/pkgs/rpms/python-teamcity-messages/teamcity-messages-1.32.tar.gz/sha512/b9733edb1e2aef4ca69773070e927a2b6162b34d8bea4b4fd22c5d7858de2d6416dcc39102aa718b4858635900519cfd7e02016143ac6a19fa82d1fd6780c0a3/teamcity-messages-1.32.tar.gz
