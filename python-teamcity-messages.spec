@@ -13,7 +13,7 @@ Source0:        https://github.com/JetBrains/teamcity-messages/archive/v%{versio
 BuildArch:      noarch
 
 BuildRequires:  python3-devel
-BuildRequires:  python3dist(pytest)
+BuildRequires:  python3dist(pytes)
 
 Enhances:  python3dist(pytest)
 Enhances:  python3dist(setuptools)
